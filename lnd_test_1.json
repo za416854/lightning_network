@@ -1,0 +1,11 @@
+{
+"nodes":  [ {"pub_key": "a"}, {"pub_key": "b"}, {"pub_key": "c"}, {"pub_key": "d"}, {"pub_key": "e"}, {"pub_key": "f"}],
+"edges":  [ 
+{"node1_pub": "a", "node2_pub": "b", "capacity":  "400", "node1_policy": {"fee_base_msat":  "2002", "fee_rate_milli_msat":  "2000"}, "node2_policy": {"fee_base_msat":  "9", "fee_rate_milli_msat":  "1040"}},
+{"node1_pub": "b", "node2_pub": "c", "capacity":  "200", "node1_policy": {"fee_base_msat":  "3030", "fee_rate_milli_msat":  "3000"}, "node2_policy": {"fee_base_msat":  "8", "fee_rate_milli_msat":  "1230"}},
+{"node1_pub": "c", "node2_pub": "d", "capacity":  "300", "node1_policy": {"fee_base_msat":  "3034", "fee_rate_milli_msat":  "3000"}, "node2_policy": {"fee_base_msat":  "7", "fee_rate_milli_msat":  "10230"}},
+{"node1_pub": "a", "node2_pub": "b", "capacity":  "700", "node1_policy": {"fee_base_msat":  "30030", "fee_rate_milli_msat":  "3000"}, "node2_policy": {"fee_base_msat":  "6", "fee_rate_milli_msat":  "143000"}},
+{"node1_pub": "d", "node2_pub": "e", "capacity":  "500", "node1_policy": {"fee_base_msat":  "30030", "fee_rate_milli_msat":  "3000"}, "node2_policy": {"fee_base_msat":  "6", "fee_rate_milli_msat":  "143000"}}
+]
+}
+
