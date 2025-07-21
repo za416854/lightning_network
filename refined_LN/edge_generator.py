@@ -1,6 +1,32 @@
 import json
 import random
 import uuid
+import time
+
+# None
+def generate_channel_policies(allow_null_prob=0.15):
+    if random.random() < allow_null_prob:
+        return None, None  # both sides null to simulate unsynced or inactive channel
+    return generate_policy(), generate_policy()
+
+def generate_policy(allow_null=True):
+    # if allow_null and random.random() < 0.1:
+    #     return None  # 10% chance to simulate missing policy
+    
+    return {
+        "time_lock_delta": random.choice([18, 40, 80, 144]),
+        "min_htlc": str(random.choice([1000, 5000, 10000])),
+        "fee_base_msat": str(random.choice([0, 1000, 2000, 3000])),
+        "fee_rate_milli_msat": str(random.choice([1, 10, 20, 50, 100])),
+        "disabled": random.choice([False, False, False, True]),  # disabled is rare
+        "max_htlc_msat": str(random.randint(10000000, 1980000000)),
+        "last_update": int(time.time()),
+        "custom_records": {},
+        "inbound_fee_base_msat": random.choice([0, 1000]),
+        "inbound_fee_rate_milli_msat": random.choice([0, 1, 5, 10])
+    }
+
+
 import hashlib
 from itertools import combinations
 from typing import List
@@ -32,7 +58,7 @@ def generate_edges(pub_keys: List[str], num_edges: int, allow_parallel: bool = F
 
         channel_id, chan_point = generate_channel_id_and_point(i)
         capacity = str(random.randint(10000, 1000000))
-
+        node1_policy, node2_policy = generate_channel_policies()
         channels.append({
             "channel_id": channel_id,
             "chan_point": chan_point,
@@ -40,8 +66,8 @@ def generate_edges(pub_keys: List[str], num_edges: int, allow_parallel: bool = F
             "node1_pub": node1,
             "node2_pub": node2,
             "capacity": capacity,
-            "node1_policy": None,
-            "node2_policy": None,
+            "node1_policy": node1_policy,
+            "node2_policy": node2_policy,
             "custom_records": {}
         })
     return channels

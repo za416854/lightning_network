@@ -5,20 +5,35 @@ from collections import defaultdict
 import json
 from sklearn.feature_extraction import DictVectorizer
 
-# 創建圖形與節點
+# ---------- 🔧 User adjustable parameters----------
+NUM_NODES = 10
+NUM_BAD_NODES = 1
+NUM_BAD_PAYMENTS = 50
+
+INCLUDE_GOOD_PAYMENTS = True
+NUM_GOOD_PAYMENTS = 20
+
+# ---------- Generate Node ----------
+nodes = [chr(ord('A') + i) if i < 26 else f"N{i}" for i in range(NUM_NODES)]
+
+# ---------- Create a graph ----------
 G = nx.Graph()
-nodes = ['A', 'B', 'C', 'D', 'E']
 G.add_nodes_from(nodes)
-edges = [('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'E'), ('A', 'C'), ('B', 'E')]
+
+# ---------- Randomly generate connections (at least 2 per node)----------
+edges = set()
+for node in nodes:
+    others = list(set(nodes) - {node})
+    neighbors = random.sample(others, min(2, len(others)))
+    for neighbor in neighbors:
+        edge = tuple(sorted([node, neighbor]))
+        edges.add(edge)
 G.add_edges_from(edges)
-
-# 選壞節點與產生壞付款
-num_bad_nodes = 1
-bad_nodes = random.sample(nodes, num_bad_nodes)
-num_bad_payments = 10
+# think about algo to sim source, destinatiom and paths 0707
+# ---------- Selecting bad nodes and generating bad payments ----------
+bad_nodes = random.sample(nodes, min(NUM_BAD_NODES, len(nodes)))
 bad_payments_paths = []
-
-for _ in range(num_bad_payments):
+for _ in range(NUM_BAD_PAYMENTS):
     sender = random.choice(bad_nodes)
     receiver_candidates = [n for n in nodes if n != sender]
     receiver = random.choice(receiver_candidates)
@@ -28,67 +43,84 @@ for _ in range(num_bad_payments):
     except nx.NetworkXNoPath:
         continue
 
-# 本地資料表（鄰居對出現次數）
+# ---------- Generate good people payment ----------
+good_payments_paths = []
+if INCLUDE_GOOD_PAYMENTS:
+    good_nodes = list(set(nodes) - set(bad_nodes))
+    for _ in range(NUM_GOOD_PAYMENTS):
+        sender = random.choice(good_nodes)
+        receiver_candidates = [n for n in good_nodes if n != sender]
+        if not receiver_candidates:
+            continue
+        receiver = random.choice(receiver_candidates)
+        try:
+            path = nx.shortest_path(G, source=sender, target=receiver)
+            good_payments_paths.append(path)
+        except nx.NetworkXNoPath:
+            continue
+
+# ---------- Building local observation data ----------
 local_data_counts = {node: defaultdict(int) for node in G.nodes()}
-for path in bad_payments_paths:
-    if len(path) >= 2: # 如果路徑長度大於等於 2（表示路徑中有至少兩個節點，即有實際的付款），才會進行後續處理。
-        for i in range(len(path)): # 對每條壞付款路徑中的每個節點進行遍歷(轉發或傳遞壞付款)
-            current_node = path[i] # current_node 設為當前遍歷到的節點
-            if i > 0 and i < len(path) - 1: # 判斷當前節點是否為中間節點
+all_paths = bad_payments_paths + good_payments_paths
+for path in all_paths:
+    if len(path) >= 2:
+        for i in range(len(path)):
+            current_node = path[i]
+            if i > 0 and i < len(path) - 1:
                 prev, nxt = path[i-1], path[i+1]
                 local_data_counts[current_node][(prev, nxt)] += 1
-            elif i == 0 and len(path) > 1: # 這段代碼處理的是起始節點（路徑的第一個節點），這個節點是壞付款的發送端
+            elif i == 0 and len(path) > 1:
                 nxt = path[i+1]
-                local_data_counts[current_node][('self_source', nxt)] += 1 # self_source: 代表這個節點是壞付款的發送端
-            elif i == len(path) - 1 and len(path) > 1: # 這段代碼處理的是結束節點（路徑的最後一個節點）
+                local_data_counts[current_node][('self_source', nxt)] += 1
+            elif i == len(path) - 1 and len(path) > 1:
                 prev = path[i-1]
-                local_data_counts[current_node][(prev, 'self_sink')] += 1 # self_sink: 代表這個節點是壞付款的接收端
+                local_data_counts[current_node][(prev, 'self_sink')] += 1
 
-
-# 使用 DictVectorizer 將本地資料轉換為特徵向量
+# ---------- Feature Vectorization ----------
 vectorizer = DictVectorizer(sparse=False)
-X = vectorizer.fit_transform(local_data_counts.values())  # 向量化所有節點的資料
+X = vectorizer.fit_transform(local_data_counts.values())
 feature_names = vectorizer.get_feature_names_out()
-print("Feature names (ordered):")
+print("🔍 Feature name:")
 print(feature_names)
-# 儲存特徵向量與對應節點
-node_features = dict(zip(G.nodes(), X.tolist()))  # 轉換為列表
 
-# 輸出特徵向量到檔案
+# save grath to JSON file 0707 
+# networkX to save to files 0707
+# ---------- Storing feature vectors and labels ----------
+node_features = dict(zip(G.nodes(), X.tolist()))
 with open("node_features.json", "w") as f:
     json.dump(node_features, f, indent=2)
 
-# 檢視轉換後的特徵向量
-print("Feature vectors for nodes:")
-print(node_features)
-    
-# 繪圖部分
-pos = nx.spring_layout(G, seed=42)  # 排版
-plt.figure(figsize=(10, 7))
+with open("bad_nodes.json", "w") as f:
+    json.dump(bad_nodes, f)
 
-# 畫所有邊
+print("✅ Feature vector output completed, total", len(node_features), "pen")
+
+# ---------- Drawing ----------
+pos = nx.spring_layout(G, seed=42)
+plt.figure(figsize=(12, 9))
 nx.draw_networkx_edges(G, pos, width=1, edge_color='gray')
+nx.draw_networkx_nodes(G, pos, nodelist=G.nodes(), node_color='skyblue', node_size=1000)
+nx.draw_networkx_nodes(G, pos, nodelist=bad_nodes, node_color='red', node_size=1000)
+nx.draw_networkx_labels(G, pos, font_color='white', font_weight='bold', font_size=10)
 
-# 畫節點：壞節點紅色，其餘藍色
-nx.draw_networkx_nodes(G, pos, nodelist=G.nodes(), node_color='skyblue', node_size=1200)
-nx.draw_networkx_nodes(G, pos, nodelist=bad_nodes, node_color='red', node_size=1200)
-
-# 節點文字
-nx.draw_networkx_labels(G, pos, font_color='white', font_weight='bold', font_size=12)
-
-# 畫壞付款路徑（紅色粗線）
+# Indicates the bad payment path (red) and the good payment path (green)
 for path in bad_payments_paths:
     edges_in_path = list(zip(path[:-1], path[1:]))
     nx.draw_networkx_edges(G, pos, edgelist=edges_in_path, edge_color='red', width=3)
 
-# 在每個節點旁邊加上本地觀察表（如 AB:2, C->D:3）
+if INCLUDE_GOOD_PAYMENTS:
+    for path in good_payments_paths:
+        edges_in_path = list(zip(path[:-1], path[1:]))
+        nx.draw_networkx_edges(G, pos, edgelist=edges_in_path, edge_color='green', width=2)
+
+# Plot statistics for each node
 for node, counts in local_data_counts.items():
     info_lines = [f"{a}->{b}:{c}" for (a, b), c in counts.items()]
     info_text = "\n".join(info_lines)
     x, y = pos[node]
-    plt.text(x + 0.05, y - 0.05, info_text, fontsize=10, color='black', ha='left', va='top')
+    plt.text(x + 0.05, y - 0.05, info_text, fontsize=8, color='black', ha='left', va='top')
 
-plt.title("P2P 壞付款視覺化圖（含節點本地觀察資料）", fontsize=14)
+plt.title(f"P2P Payment Visualization: {NUM_NODES} nodes, {NUM_BAD_NODES} bad nodes", fontsize=14)
 plt.axis('off')
 plt.tight_layout()
 plt.show()

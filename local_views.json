@@ -1,0 +1,52 @@
+{
+  "A": [
+    {
+      "from": "B",
+      "to": "self_sink",
+      "count": 2
+    }
+  ],
+  "B": [
+    {
+      "from": "self_source",
+      "to": "E",
+      "count": 3
+    },
+    {
+      "from": "self_source",
+      "to": "C",
+      "count": 5
+    },
+    {
+      "from": "self_source",
+      "to": "A",
+      "count": 2
+    }
+  ],
+  "C": [
+    {
+      "from": "B",
+      "to": "self_sink",
+      "count": 4
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "count": 1
+    }
+  ],
+  "D": [
+    {
+      "from": "C",
+      "to": "self_sink",
+      "count": 1
+    }
+  ],
+  "E": [
+    {
+      "from": "B",
+      "to": "self_sink",
+      "count": 3
+    }
+  ]
+}
