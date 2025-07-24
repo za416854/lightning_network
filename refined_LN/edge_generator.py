@@ -4,7 +4,8 @@ import uuid
 import time
 
 # None
-def generate_channel_policies(allow_null_prob=0.15):
+allow_null_prob = 0
+def generate_channel_policies(allow_null_prob=allow_null_prob):
     if random.random() < allow_null_prob:
         return None, None  # both sides null to simulate unsynced or inactive channel
     return generate_policy(), generate_policy()
@@ -18,7 +19,7 @@ def generate_policy(allow_null=True):
         "min_htlc": str(random.choice([1000, 5000, 10000])),
         "fee_base_msat": str(random.choice([0, 1000, 2000, 3000])),
         "fee_rate_milli_msat": str(random.choice([1, 10, 20, 50, 100])),
-        "disabled": random.choice([False, False, False, True]),  # disabled is rare
+        "disabled": random.choice([False]*9 + [True]*1),  # disabled is rare
         "max_htlc_msat": str(random.randint(10000000, 1980000000)),
         "last_update": int(time.time()),
         "custom_records": {},
@@ -47,15 +48,15 @@ def generate_edges(pub_keys: List[str], num_edges: int, allow_parallel: bool = F
     channels = []
     pair_set = set()
     
-    for i in range(num_edges):
-        node1, node2 = random.sample(pub_keys, 2)
-        pair = tuple(sorted((node1, node2)))
+    all_possible_pairs = list(combinations(pub_keys, 2))
+    if not allow_parallel:
+        random.shuffle(all_possible_pairs)
+        selected_pairs = all_possible_pairs[:min(num_edges, len(all_possible_pairs))]
+    else:
+        selected_pairs = [tuple(random.sample(pub_keys, 2)) for _ in range(num_edges)]
 
-        if not allow_parallel and pair in pair_set:
-            continue  # skip duplicate pair if not allowing parallel
-
-        pair_set.add(pair)
-
+    for i, pair in enumerate(selected_pairs):
+        node1, node2 = pair
         channel_id, chan_point = generate_channel_id_and_point(i)
         capacity = str(random.randint(10000, 1000000))
         node1_policy, node2_policy = generate_channel_policies()
@@ -70,7 +71,9 @@ def generate_edges(pub_keys: List[str], num_edges: int, allow_parallel: bool = F
             "node2_policy": node2_policy,
             "custom_records": {}
         })
+
     return channels
+
 
 def save_edges(edges: List[dict], output_path: str):
     with open(output_path, 'w') as f:
@@ -79,10 +82,12 @@ def save_edges(edges: List[dict], output_path: str):
 if __name__ == "__main__":
     node_file_path = "nodes_22.json"  # your input node file
     output_file_path = "edges_generated.json"
-    NUM_EDGES = 80  # adjustable
-    ALLOW_PARALLEL_CHANNELS = True  # toggle this for parallel channel behavior
+    NUM_EDGES = 100  # adjustable
+    ALLOW_PARALLEL_CHANNELS = False  # toggle this for parallel channel behavior
 
     pub_keys = load_nodes(node_file_path)
+    print(f" nodes number from {node_file_path}: {len(pub_keys)}")
+    # print(f"節點公鑰: {pub_keys}")
     edges = generate_edges(pub_keys, NUM_EDGES, allow_parallel=ALLOW_PARALLEL_CHANNELS)
     save_edges(edges, output_file_path)
-    print(f"Generated {len(edges)} edges saved to {output_file_path}")
+    print(f"✅ Generated {len(edges)} edges saved to {output_file_path}")

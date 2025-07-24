@@ -11,9 +11,10 @@ OUTPUT_TRANSACTIONS = "transactions_simulated.json"
 OUTPUT_FEATURES = "node_features.json"
 
 NUM_TRANSACTIONS = 1000
-BAD_NODES_NUM = 5
-MAX_AMOUNT = 1000000
-
+BAD_NODES_NUM = 2
+MAX_AMOUNT = 300000
+MIN_AMOUNT = 1000
+BAD_NODE_FAIL_RATE = 0.8
 # === Load Graph ===
 def load_graph(nodes_path, edges_path):
     with open(nodes_path, "r") as f:
@@ -48,7 +49,7 @@ def simulate_transactions(G, bad_nodes, num_transactions):
 
     for _ in range(num_transactions):
         source, target = random.sample(node_keys, 2)
-        amount = random.randint(1000, MAX_AMOUNT)
+        amount = random.randint(MIN_AMOUNT, MAX_AMOUNT)
         success = True
         fail_reason = None
         path = []
@@ -81,8 +82,9 @@ def simulate_transactions(G, bad_nodes, num_transactions):
                 fail_reason = "insufficient_capacity"
 
             if fail_reason is None and (source in bad_nodes or target in bad_nodes):
-                success = False
-                fail_reason = "bad_node"
+                if random.random() < BAD_NODE_FAIL_RATE:
+                    success = False
+                    fail_reason = "bad_node"
 
         except nx.NetworkXNoPath:
             path = [source, target]
@@ -107,7 +109,7 @@ def simulate_transactions(G, bad_nodes, num_transactions):
 
     for _ in range(num_transactions):
         source, target = random.sample(node_keys, 2)
-        amount = random.randint(1000, MAX_AMOUNT)
+        amount = random.randint(MIN_AMOUNT, MAX_AMOUNT)
         success = True
         path = []
 
@@ -225,5 +227,11 @@ if __name__ == "__main__":
 
     with open(OUTPUT_FEATURES, "w") as f:
         json.dump(node_features, f, indent=2)
-
+        
+    with open("bad_nodes.json", "w") as f:
+        json.dump(list(BAD_NODES), f, indent=2)
     print(f"✅ Simulated {NUM_TRANSACTIONS} transactions and extracted features.")
+    print(f"✅ node_features.json been created.")
+    print(f"✅ transactions_simulated.json been created.")
+    print(f"✅ bad_nodes.json been created.")
+    
