@@ -2,7 +2,6 @@ import json
 import pickle
 import numpy as np
 import random
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
@@ -18,8 +17,8 @@ with open("bad_nodes.json") as f:
 
 test_size = 0.2
 
-# ==== Feature selection flags ====
-feature_flags = {
+# ==== Dynamic features you already had ====
+dynamic_feature_flags = {
     "as_source": True,
     "as_target": True,
     "as_intermediate": True,
@@ -29,33 +28,63 @@ feature_flags = {
     "clustering": True,
 }
 
+# ==== Collect ALL static feature_* keys that appear in the JSON (choice A) ====
+all_keys = set()
+for feats in node_features.values():
+    all_keys.update(feats.keys())
+
+# keep only feature_* keys
+static_feature_names = [k for k in all_keys if k.startswith("feature_")]
+
+# make the order stable (sort by numeric part if possible)
+def feature_key(k):
+    try:
+        return int(k.split("_")[1])
+    except Exception:
+        return 10**9  # put weird keys at the end
+
+static_feature_names = sorted(static_feature_names, key=feature_key)
+
+# ==== Final feature name list (dynamic first, then static) ====
+dynamic_feature_names = [k for k, v in dynamic_feature_flags.items() if v]
+feature_names = dynamic_feature_names + static_feature_names
+
+print("✅ Using features:")
+for n in feature_names:
+    print("  -", n)
+
 # ==== Build X, y ====
 X = []
 y = []
 node_ids = []
 
-for node_id, features in node_features.items():
-    vec = [features.get(k, 0) for k, v in feature_flags.items() if v]
+for node_id, feats in node_features.items():
+    vec = []
+    for name in feature_names:
+        val = feats.get(name, 0)
+        # booleans -> 0/1
+        if isinstance(val, bool):
+            val = int(val)
+        vec.append(val)
     X.append(vec)
     y.append(1 if node_id in bad_nodes else 0)
     node_ids.append(node_id)
 
-X = np.array(X)
+X = np.array(X, dtype=float)
 y = np.array(y)
 
-print(f"📦 Total nodes: {len(X)}")
+print(f"\n📦 Total nodes: {len(X)}")
 
 # ==== Ensure at least one bad node in test ====
 bad_indices = [i for i, nid in enumerate(node_ids) if nid in bad_nodes]
-good_indices = [i for i, nid in enumerate(node_ids) if nid not in bad_nodes]
-
-# 固定挑出一個壞節點放入 test
+if not bad_indices:
+    raise ValueError("No bad nodes found in labels (bad_nodes.json).")
 test_bad_index = random.choice(bad_indices)
 remaining_indices = list(set(range(len(X))) - {test_bad_index})
 random.shuffle(remaining_indices)
 
 test_size_count = int(len(X) * test_size) - 1
-test_indices = [test_bad_index] + remaining_indices[:test_size_count]
+test_indices = [test_bad_index] + remaining_indices[:max(test_size_count, 0)]
 train_indices = list(set(range(len(X))) - set(test_indices))
 
 X_train = X[train_indices]
@@ -67,43 +96,48 @@ y_test = y[test_indices]
 id_test = [node_ids[i] for i in test_indices]
 
 print(f"🧪 Training size: {len(X_train)} | Testing size: {len(X_test)}")
-
-# ==== Show bad nodes in training and test ====
-# print("\n🔑 Bad nodes in training:")
-# print([nid[:6] for nid in id_train if nid in bad_nodes])
-
-print("🔑 Bad nodes in test:")
-print([nid[:6] for nid in id_test if nid in bad_nodes])
+print("🔑 Bad nodes in test:",
+      [nid[:6] for nid in id_test if nid in bad_nodes])
 
 # ==== Select Model ====
-MODEL_TYPE = "random_forest"  # Options: logistic, random_forest, svm, xgboost
+MODEL_TYPE = "logistic"  # Options: logistic, random_forest, svm, xgboost
 
 if MODEL_TYPE == "logistic":
-    clf = LogisticRegression()
+    clf = LogisticRegression(max_iter=5000)
 elif MODEL_TYPE == "random_forest":
-    clf = RandomForestClassifier(n_estimators=100, random_state=42)
+    clf = RandomForestClassifier(n_estimators=300, random_state=42, class_weight="balanced")
 elif MODEL_TYPE == "svm":
-    clf = SVC(probability=True, kernel="rbf")
+    clf = SVC(probability=True, kernel="rbf", class_weight="balanced")
 elif MODEL_TYPE == "xgboost":
-    clf = XGBClassifier(use_label_encoder=False, eval_metric='logloss')
+    clf = XGBClassifier(use_label_encoder=False,
+                        eval_metric='logloss',
+                        scale_pos_weight=(y_train==0).sum()/(y_train==1).sum())
 else:
     raise ValueError("Unsupported MODEL_TYPE")
-
 
 # ==== Train Model ====
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
-y_prob = clf.predict_proba(X_test)[:, 1]
+if hasattr(clf, "predict_proba"):
+    y_prob = clf.predict_proba(X_test)[:, 1]
+else:
+    # SVM w/o probability=True would come here; but we set probability=True above.
+    y_prob = np.zeros_like(y_pred, dtype=float)
 
-
-# ==== Show feature coefficients if logistic ====
+# ==== If logistic, print signed coefficients ====
 if MODEL_TYPE == "logistic":
-    feature_names = [k for k, v in feature_flags.items() if v]
-    print("\n🔍 Dynamic feature Coefficients:")
-    for name, coef in zip(feature_names, clf.coef_[0]):
+    print("\n🔍 Logistic Coefficients (sign = direction):")
+    for name, coef in sorted(zip(feature_names, clf.coef_[0]), key=lambda x: abs(x[1]), reverse=True):
         direction = '+' if coef > 0 else '-'
-        print(f"{name:25}: {direction}{abs(coef):.4f}")
-        
+        print(f"{name:25}: {direction}{abs(coef):.6f}")
+
+# ==== If tree-based, show importances ====
+if hasattr(clf, "feature_importances_"):
+    print("\n🌲 Feature importances (Top 20):")
+    importances = clf.feature_importances_
+    for name, imp in sorted(zip(feature_names, importances), key=lambda x: x[1], reverse=True)[:20]:
+        print(f"{name:25}: {imp:.6f}")
+
 # ==== Report ====
 print("\n📊 Classification Report:")
 print(classification_report(y_test, y_pred))
@@ -142,7 +176,6 @@ recall = tp / (tp + fn) if (tp + fn) else 0
 
 print(f"\n🎯 Precision: {precision:.2f}")
 print(f"🔁 Recall: {recall:.2f}")
-
 
 # ==== Save model ====
 with open("trained_model.pkl", "wb") as f:
