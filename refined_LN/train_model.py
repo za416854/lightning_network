@@ -100,7 +100,7 @@ print("🔑 Bad nodes in test:",
       [nid[:6] for nid in id_test if nid in bad_nodes])
 
 # ==== Select Model ====
-MODEL_TYPE = "logistic"  # Options: logistic, random_forest, svm, xgboost
+MODEL_TYPE = "xgboost"  # Options: logistic, random_forest, svm, xgboost
 
 if MODEL_TYPE == "logistic":
     clf = LogisticRegression(max_iter=5000)
@@ -115,7 +115,47 @@ elif MODEL_TYPE == "xgboost":
 else:
     raise ValueError("Unsupported MODEL_TYPE")
 
-# ==== Train Model ====
+
+# ==== K-Fold Cross Validation ====
+from sklearn.model_selection import StratifiedKFold
+# from sklearn.model_selection import StratifiedShuffleSplit
+
+from sklearn.metrics import precision_score, recall_score
+
+kf = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+# kf = StratifiedShuffleSplit(n_splits=3, test_size=0.2, random_state=42)
+all_precisions = []
+all_recalls = []
+
+for fold, (train_idx, test_idx) in enumerate(kf.split(X, y), 1):
+    X_train, X_test = X[train_idx], X[test_idx]
+    y_train, y_test = y[train_idx], y[test_idx]
+
+    if MODEL_TYPE == "logistic":
+        clf = LogisticRegression(max_iter=5000)
+    elif MODEL_TYPE == "random_forest":
+        clf = RandomForestClassifier(n_estimators=300, random_state=42, class_weight="balanced")
+    elif MODEL_TYPE == "svm":
+        clf = SVC(probability=True, kernel="rbf", class_weight="balanced")
+    elif MODEL_TYPE == "xgboost":
+        clf = XGBClassifier(use_label_encoder=False,
+                            eval_metric='logloss',
+                            scale_pos_weight=(y_train==0).sum()/(y_train==1).sum())
+    else:
+        raise ValueError("Unsupported MODEL_TYPE")
+
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+
+    print(f"\n📘 Fold {fold} Report:")
+    print(classification_report(y_test, y_pred))
+
+    precision = precision_score(y_test, y_pred, zero_division=0)
+    recall = recall_score(y_test, y_pred, zero_division=0)
+    all_precisions.append(precision)
+    all_recalls.append(recall)
+    print(f"🎯 Precision: {precision:.3f}, 🔁 Recall: {recall:.3f}")
+
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
 if hasattr(clf, "predict_proba"):

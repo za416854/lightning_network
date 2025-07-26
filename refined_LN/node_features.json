@@ -1,200 +1,452 @@
 {
-  "02006870c8b24c5070e1eae20e7522268eed4236787dff4c050cbf52eb9eda1033": {
-    "as_source": 57,
-    "as_target": 59,
-    "as_intermediate": 72,
-    "non_typical_paths": 72,
-    "success_rate": 0.543859649122807,
-    "degree_centrality": 0.42857142857142855,
-    "clustering": 0.3888888888888889
-  },
-  "0200081eaa41b5661d3b512f5aae9d6abfb11ba1497a354e9217d9a18fbaa1e76b": {
-    "as_source": 45,
-    "as_target": 44,
-    "as_intermediate": 53,
-    "non_typical_paths": 53,
-    "success_rate": 0.5555555555555556,
-    "degree_centrality": 0.2857142857142857,
-    "clustering": 0.4
-  },
-  "02005028c1f9d99c39875cffbfbb2efdb6c103ba85ffeefbd06b9e44df195ad713": {
-    "as_source": 61,
-    "as_target": 41,
-    "as_intermediate": 58,
-    "non_typical_paths": 58,
-    "success_rate": 0.8032786885245902,
-    "degree_centrality": 0.3333333333333333,
-    "clustering": 0.42857142857142855
-  },
-  "0200000000a3eff613189ca6c4070c89206ad658e286751eca1f29262948247a5f": {
-    "as_source": 51,
-    "as_target": 48,
-    "as_intermediate": 78,
-    "non_typical_paths": 78,
-    "success_rate": 0.49019607843137253,
-    "degree_centrality": 0.5714285714285714,
-    "clustering": 0.3181818181818182
-  },
-  "02001bcff2e27f6aa2aa8e68c7e5944bcbf5daf4954963e5a1ce2ab6f5386d0342": {
-    "as_source": 51,
-    "as_target": 41,
-    "as_intermediate": 75,
-    "non_typical_paths": 75,
-    "success_rate": 0.47058823529411764,
-    "degree_centrality": 0.47619047619047616,
-    "clustering": 0.35555555555555557
-  },
-  "0200072fd301cb4a680f26d87c28b705ccd6a1d5b00f1b5efd7fe5f998f1bbb1f1": {
-    "as_source": 42,
-    "as_target": 54,
-    "as_intermediate": 67,
-    "non_typical_paths": 67,
-    "success_rate": 0.6190476190476191,
-    "degree_centrality": 0.38095238095238093,
-    "clustering": 0.35714285714285715
-  },
-  "02004c625d622245606a1ea2c1c69cfb4516b703b47945a3647713c05fe4aaeb1c": {
-    "as_source": 49,
-    "as_target": 52,
-    "as_intermediate": 74,
-    "non_typical_paths": 74,
-    "success_rate": 0.10204081632653061,
-    "degree_centrality": 0.47619047619047616,
-    "clustering": 0.4222222222222222
-  },
-  "02006b7be7ea4b7cdf181c5c7b338e80904f13173220eb07e991a268e518a35b4a": {
-    "as_source": 49,
-    "as_target": 50,
-    "as_intermediate": 68,
-    "non_typical_paths": 68,
-    "success_rate": 0.7142857142857143,
-    "degree_centrality": 0.38095238095238093,
-    "clustering": 0.4642857142857143
-  },
-  "0200420ebfb0c6162e7dfcbcb5ca23df9f423ceb0536617d1b4549fc4efa6a15d5": {
-    "as_source": 39,
-    "as_target": 53,
-    "as_intermediate": 82,
-    "non_typical_paths": 82,
-    "success_rate": 0.5384615384615384,
-    "degree_centrality": 0.5238095238095237,
-    "clustering": 0.38181818181818183
-  },
-  "02001828ca7eb8e44d4d78b5c1ea609cd3744be823c22cd69d895eff2f9345892d": {
-    "as_source": 38,
-    "as_target": 42,
-    "as_intermediate": 81,
-    "non_typical_paths": 81,
-    "success_rate": 0.47368421052631576,
-    "degree_centrality": 0.47619047619047616,
-    "clustering": 0.4666666666666667
-  },
-  "0200773d5aee6a9ee90cca37a1350d14def091b51b008e838c6d64671abefd4eeb": {
-    "as_source": 40,
-    "as_target": 43,
-    "as_intermediate": 76,
-    "non_typical_paths": 76,
-    "success_rate": 0.175,
-    "degree_centrality": 0.42857142857142855,
-    "clustering": 0.4444444444444444
-  },
-  "0200000000727d3b67513c916f16975e3bf8f3304cf3fcf0ed855e2ae41888f461": {
-    "as_source": 46,
-    "as_target": 42,
-    "as_intermediate": 54,
-    "non_typical_paths": 54,
-    "success_rate": 0.717391304347826,
-    "degree_centrality": 0.3333333333333333,
-    "clustering": 0.3333333333333333
-  },
-  "0200469788c5528058032ba487da129247fe8f15a017457e2b233305378fef62a4": {
-    "as_source": 46,
-    "as_target": 51,
-    "as_intermediate": 80,
-    "non_typical_paths": 80,
-    "success_rate": 0.3695652173913043,
-    "degree_centrality": 0.5238095238095237,
-    "clustering": 0.4
-  },
-  "020055cfd1c07c63530ff4471eabd2b286efd9a493137215bab684590c62d27ba4": {
-    "as_source": 38,
-    "as_target": 43,
-    "as_intermediate": 63,
-    "non_typical_paths": 63,
-    "success_rate": 0.34210526315789475,
-    "degree_centrality": 0.3333333333333333,
-    "clustering": 0.47619047619047616
-  },
-  "02005a505c16ab5321e73f1efbd0fc74e2cccda04e67fda3a036438c6372b3c918": {
-    "as_source": 44,
-    "as_target": 50,
-    "as_intermediate": 69,
-    "non_typical_paths": 69,
-    "success_rate": 0.6818181818181818,
-    "degree_centrality": 0.38095238095238093,
-    "clustering": 0.35714285714285715
+  "02017f01f646318be8707ebf07b1f38bd89577f1654102057b824f91c70f75f9b8": {
+    "as_source": 68,
+    "as_target": 55,
+    "as_intermediate": 354,
+    "non_typical_paths": 354,
+    "success_rate": 0.10294117647058823,
+    "degree_centrality": 0.44897959183673464,
+    "clustering": 0.37662337662337664
   },
   "020003b9499a97c8dfbbab6b196319db37ba9c37bccb60477f3c867175f417988e": {
-    "as_source": 38,
-    "as_target": 33,
-    "as_intermediate": 65,
-    "non_typical_paths": 65,
-    "success_rate": 0.5,
-    "degree_centrality": 0.38095238095238093,
-    "clustering": 0.5
+    "as_source": 53,
+    "as_target": 67,
+    "as_intermediate": 372,
+    "non_typical_paths": 372,
+    "success_rate": 0.22641509433962265,
+    "degree_centrality": 0.4693877551020408,
+    "clustering": 0.4031620553359684
   },
   "02005dcac896582db30f259c17bba1849a9e1127f60d120ec7db69c17ce64d749d": {
-    "as_source": 56,
-    "as_target": 51,
-    "as_intermediate": 85,
-    "non_typical_paths": 85,
-    "success_rate": 0.07142857142857142,
-    "degree_centrality": 0.5238095238095237,
-    "clustering": 0.36363636363636365
+    "as_source": 69,
+    "as_target": 62,
+    "as_intermediate": 321,
+    "non_typical_paths": 321,
+    "success_rate": 0.7101449275362319,
+    "degree_centrality": 0.36734693877551017,
+    "clustering": 0.40522875816993464
   },
-  "02004d8933df4f002fa95d8c37ca43eb9c175d310aad55cc6d442e4accc3740029": {
-    "as_source": 32,
-    "as_target": 41,
-    "as_intermediate": 53,
-    "non_typical_paths": 53,
-    "success_rate": 0.65625,
-    "degree_centrality": 0.2857142857142857,
-    "clustering": 0.5333333333333333
+  "0200a9d22ee6d8be768eb8050a853ecc182b32cb952ba50b7cac8997bebb83b84a": {
+    "as_source": 50,
+    "as_target": 53,
+    "as_intermediate": 322,
+    "non_typical_paths": 322,
+    "success_rate": 0.6,
+    "degree_centrality": 0.3877551020408163,
+    "clustering": 0.4093567251461988
   },
-  "020060ce06e5130c55900c4c4b0d6bc34e72f94d948854b6e0670f154472d014ec": {
-    "as_source": 34,
-    "as_target": 50,
-    "as_intermediate": 84,
-    "non_typical_paths": 84,
-    "success_rate": 0.5,
-    "degree_centrality": 0.5238095238095237,
-    "clustering": 0.41818181818181815
+  "0200072fd301cb4a680f26d87c28b705ccd6a1d5b00f1b5efd7fe5f998f1bbb1f1": {
+    "as_source": 67,
+    "as_target": 73,
+    "as_intermediate": 339,
+    "non_typical_paths": 339,
+    "success_rate": 0.6119402985074627,
+    "degree_centrality": 0.36734693877551017,
+    "clustering": 0.39869281045751637
   },
-  "0200232177944d5e2ddf5b203843050dee40c4b7f343356499ed9aeb4eb154fd4e": {
-    "as_source": 53,
-    "as_target": 37,
-    "as_intermediate": 83,
-    "non_typical_paths": 83,
-    "success_rate": 0.33962264150943394,
-    "degree_centrality": 0.5238095238095237,
-    "clustering": 0.3090909090909091
-  },
-  "0200424bd89b5282c310e10a52fd783070556f947b54d93f73fd89534ce0cba708": {
-    "as_source": 39,
-    "as_target": 40,
-    "as_intermediate": 77,
-    "non_typical_paths": 77,
-    "success_rate": 0.8205128205128205,
-    "degree_centrality": 0.42857142857142855,
-    "clustering": 0.4722222222222222
+  "020127a8c646ce3399d638f94dff84dc9792e56e77b8886c5e23854c4d18557734": {
+    "as_source": 63,
+    "as_target": 68,
+    "as_intermediate": 304,
+    "non_typical_paths": 304,
+    "success_rate": 0.7619047619047619,
+    "degree_centrality": 0.32653061224489793,
+    "clustering": 0.45
   },
   "02003e8f41444fbddbfce965eaeb45b362b5c1b0e52b16cc249807ba7f78877928": {
+    "as_source": 53,
+    "as_target": 60,
+    "as_intermediate": 408,
+    "non_typical_paths": 408,
+    "success_rate": 0.6792452830188679,
+    "degree_centrality": 0.5714285714285714,
+    "clustering": 0.3941798941798942
+  },
+  "020060ce06e5130c55900c4c4b0d6bc34e72f94d948854b6e0670f154472d014ec": {
+    "as_source": 59,
+    "as_target": 50,
+    "as_intermediate": 228,
+    "non_typical_paths": 228,
+    "success_rate": 0.6779661016949152,
+    "degree_centrality": 0.24489795918367346,
+    "clustering": 0.4090909090909091
+  },
+  "02006870c8b24c5070e1eae20e7522268eed4236787dff4c050cbf52eb9eda1033": {
+    "as_source": 74,
+    "as_target": 68,
+    "as_intermediate": 410,
+    "non_typical_paths": 410,
+    "success_rate": 0.7837837837837838,
+    "degree_centrality": 0.4897959183673469,
+    "clustering": 0.4311594202898551
+  },
+  "0200f060968b4b90bd8da87d62c4c6d08f2d1a91dd18ca5c3b7acd9885f2b23745": {
+    "as_source": 57,
+    "as_target": 66,
+    "as_intermediate": 419,
+    "non_typical_paths": 419,
+    "success_rate": 0.7719298245614035,
+    "degree_centrality": 0.5102040816326531,
+    "clustering": 0.38666666666666666
+  },
+  "020111074bd304e17a1cc74e1f4b76d64b1764895ae3a26ad3ab2c4fd0f63cdc35": {
+    "as_source": 57,
+    "as_target": 75,
+    "as_intermediate": 350,
+    "non_typical_paths": 350,
+    "success_rate": 0.7192982456140351,
+    "degree_centrality": 0.44897959183673464,
+    "clustering": 0.329004329004329
+  },
+  "020055cfd1c07c63530ff4471eabd2b286efd9a493137215bab684590c62d27ba4": {
     "as_source": 52,
-    "as_target": 35,
-    "as_intermediate": 87,
-    "non_typical_paths": 87,
-    "success_rate": 0.36538461538461536,
-    "degree_centrality": 0.5238095238095237,
+    "as_target": 51,
+    "as_intermediate": 349,
+    "non_typical_paths": 349,
+    "success_rate": 0.17307692307692307,
+    "degree_centrality": 0.42857142857142855,
     "clustering": 0.4
+  },
+  "02001828ca7eb8e44d4d78b5c1ea609cd3744be823c22cd69d895eff2f9345892d": {
+    "as_source": 67,
+    "as_target": 56,
+    "as_intermediate": 317,
+    "non_typical_paths": 317,
+    "success_rate": 0.7313432835820896,
+    "degree_centrality": 0.36734693877551017,
+    "clustering": 0.3790849673202614
+  },
+  "020153f202e79ac0cc9a6cb806437845e2ebe0a219a242d2ce3394d5488a4b1442": {
+    "as_source": 68,
+    "as_target": 60,
+    "as_intermediate": 312,
+    "non_typical_paths": 312,
+    "success_rate": 0.75,
+    "degree_centrality": 0.36734693877551017,
+    "clustering": 0.37254901960784315
+  },
+  "0200469788c5528058032ba487da129247fe8f15a017457e2b233305378fef62a4": {
+    "as_source": 57,
+    "as_target": 51,
+    "as_intermediate": 363,
+    "non_typical_paths": 363,
+    "success_rate": 0.14035087719298245,
+    "degree_centrality": 0.4897959183673469,
+    "clustering": 0.35507246376811596
+  },
+  "02006b7be7ea4b7cdf181c5c7b338e80904f13173220eb07e991a268e518a35b4a": {
+    "as_source": 58,
+    "as_target": 45,
+    "as_intermediate": 253,
+    "non_typical_paths": 253,
+    "success_rate": 0.6551724137931034,
+    "degree_centrality": 0.3061224489795918,
+    "clustering": 0.4380952380952381
+  },
+  "0200e33d06cf5d6ec9a0e5718d714646a2d50ea68fc24e6ad3211610252b7ac3c7": {
+    "as_source": 58,
+    "as_target": 38,
+    "as_intermediate": 364,
+    "non_typical_paths": 364,
+    "success_rate": 0.7068965517241379,
+    "degree_centrality": 0.42857142857142855,
+    "clustering": 0.3904761904761905
+  },
+  "02010c04c4163cd92afe491732335af07bfa0d804d2e6fc22b9e858cbb2cf96bac": {
+    "as_source": 54,
+    "as_target": 54,
+    "as_intermediate": 268,
+    "non_typical_paths": 268,
+    "success_rate": 0.07407407407407407,
+    "degree_centrality": 0.32653061224489793,
+    "clustering": 0.4166666666666667
+  },
+  "0200ea161d8c15afaf24fe25df4ac6b06c5a86dbf5d912747292765f5fcd620f44": {
+    "as_source": 54,
+    "as_target": 77,
+    "as_intermediate": 409,
+    "non_typical_paths": 409,
+    "success_rate": 0.7777777777777778,
+    "degree_centrality": 0.4693877551020408,
+    "clustering": 0.42292490118577075
+  },
+  "02016a19c7443418d00b1603c3ddefd5c932c8a296859e7e78aff10ed297c87213": {
+    "as_source": 63,
+    "as_target": 66,
+    "as_intermediate": 386,
+    "non_typical_paths": 386,
+    "success_rate": 0.6825396825396826,
+    "degree_centrality": 0.5306122448979591,
+    "clustering": 0.38461538461538464
+  },
+  "0200e5a6afd0cca4383b67a7ed18fc0af24b80f475295d683ee58d7fb00e8d9b13": {
+    "as_source": 56,
+    "as_target": 59,
+    "as_intermediate": 238,
+    "non_typical_paths": 238,
+    "success_rate": 0.7142857142857143,
+    "degree_centrality": 0.3061224489795918,
+    "clustering": 0.3333333333333333
+  },
+  "0200c06eaaef0ffc98447b5f0c5810c8325fc50fba4c509ebf558d67d1f088bdad": {
+    "as_source": 62,
+    "as_target": 63,
+    "as_intermediate": 299,
+    "non_typical_paths": 299,
+    "success_rate": 0.1774193548387097,
+    "degree_centrality": 0.3469387755102041,
+    "clustering": 0.4411764705882353
+  },
+  "02005a505c16ab5321e73f1efbd0fc74e2cccda04e67fda3a036438c6372b3c918": {
+    "as_source": 57,
+    "as_target": 61,
+    "as_intermediate": 290,
+    "non_typical_paths": 290,
+    "success_rate": 0.7192982456140351,
+    "degree_centrality": 0.3877551020408163,
+    "clustering": 0.3684210526315789
+  },
+  "02018467279b42635c6e923b71d6bd914ebe8541decc09c2f5638678d038d954f5": {
+    "as_source": 58,
+    "as_target": 76,
+    "as_intermediate": 395,
+    "non_typical_paths": 395,
+    "success_rate": 0.22413793103448276,
+    "degree_centrality": 0.4897959183673469,
+    "clustering": 0.42391304347826086
+  },
+  "0200773d5aee6a9ee90cca37a1350d14def091b51b008e838c6d64671abefd4eeb": {
+    "as_source": 52,
+    "as_target": 60,
+    "as_intermediate": 350,
+    "non_typical_paths": 350,
+    "success_rate": 0.19230769230769232,
+    "degree_centrality": 0.42857142857142855,
+    "clustering": 0.40476190476190477
+  },
+  "020129a90672158cd9c59acc6f1c9ae1e460c92f28b33e2339882c1b388b45da9c": {
+    "as_source": 49,
+    "as_target": 54,
+    "as_intermediate": 307,
+    "non_typical_paths": 307,
+    "success_rate": 0.2857142857142857,
+    "degree_centrality": 0.3877551020408163,
+    "clustering": 0.38011695906432746
+  },
+  "0200000000a3eff613189ca6c4070c89206ad658e286751eca1f29262948247a5f": {
+    "as_source": 58,
+    "as_target": 53,
+    "as_intermediate": 394,
+    "non_typical_paths": 394,
+    "success_rate": 0.6896551724137931,
+    "degree_centrality": 0.4693877551020408,
+    "clustering": 0.42292490118577075
+  },
+  "0200420ebfb0c6162e7dfcbcb5ca23df9f423ceb0536617d1b4549fc4efa6a15d5": {
+    "as_source": 72,
+    "as_target": 55,
+    "as_intermediate": 340,
+    "non_typical_paths": 340,
+    "success_rate": 0.75,
+    "degree_centrality": 0.36734693877551017,
+    "clustering": 0.5228758169934641
+  },
+  "02001bcff2e27f6aa2aa8e68c7e5944bcbf5daf4954963e5a1ce2ab6f5386d0342": {
+    "as_source": 57,
+    "as_target": 63,
+    "as_intermediate": 285,
+    "non_typical_paths": 285,
+    "success_rate": 0.8070175438596491,
+    "degree_centrality": 0.3469387755102041,
+    "clustering": 0.36764705882352944
+  },
+  "0200081eaa41b5661d3b512f5aae9d6abfb11ba1497a354e9217d9a18fbaa1e76b": {
+    "as_source": 78,
+    "as_target": 63,
+    "as_intermediate": 393,
+    "non_typical_paths": 393,
+    "success_rate": 0.5641025641025641,
+    "degree_centrality": 0.4897959183673469,
+    "clustering": 0.42028985507246375
+  },
+  "020181c396116c982caf1465416e1af6008c6caa43883841a606e6ac09df94a3db": {
+    "as_source": 64,
+    "as_target": 66,
+    "as_intermediate": 328,
+    "non_typical_paths": 328,
+    "success_rate": 0.71875,
+    "degree_centrality": 0.4081632653061224,
+    "clustering": 0.4421052631578947
+  },
+  "020181e74c5c80bbb4b47f58e1e1012013a199989f61597d6fc5b4e386df79d3ce": {
+    "as_source": 54,
+    "as_target": 60,
+    "as_intermediate": 324,
+    "non_typical_paths": 324,
+    "success_rate": 0.14814814814814814,
+    "degree_centrality": 0.3877551020408163,
+    "clustering": 0.42105263157894735
+  },
+  "02014c10a8c382a077f37c6a0c3abb036027a445d2eb87897a23910ac64e762e74": {
+    "as_source": 66,
+    "as_target": 43,
+    "as_intermediate": 352,
+    "non_typical_paths": 352,
+    "success_rate": 0.7272727272727273,
+    "degree_centrality": 0.4081632653061224,
+    "clustering": 0.38421052631578945
+  },
+  "0200424bd89b5282c310e10a52fd783070556f947b54d93f73fd89534ce0cba708": {
+    "as_source": 62,
+    "as_target": 76,
+    "as_intermediate": 299,
+    "non_typical_paths": 299,
+    "success_rate": 0.8064516129032258,
+    "degree_centrality": 0.3877551020408163,
+    "clustering": 0.4619883040935672
+  },
+  "02016e4df84a0c729f459d5842529900404aa5469c0f653f1b012c27775021a5d4": {
+    "as_source": 62,
+    "as_target": 47,
+    "as_intermediate": 389,
+    "non_typical_paths": 389,
+    "success_rate": 0.6129032258064516,
+    "degree_centrality": 0.4693877551020408,
+    "clustering": 0.3675889328063241
+  },
+  "0200232177944d5e2ddf5b203843050dee40c4b7f343356499ed9aeb4eb154fd4e": {
+    "as_source": 52,
+    "as_target": 58,
+    "as_intermediate": 284,
+    "non_typical_paths": 284,
+    "success_rate": 0.19230769230769232,
+    "degree_centrality": 0.32653061224489793,
+    "clustering": 0.4166666666666667
+  },
+  "0201bbc44301ec1bdf3da081e19e960adf133806d19e439eb116bb84a8a62e7408": {
+    "as_source": 44,
+    "as_target": 73,
+    "as_intermediate": 261,
+    "non_typical_paths": 261,
+    "success_rate": 0.5909090909090909,
+    "degree_centrality": 0.3469387755102041,
+    "clustering": 0.4338235294117647
+  },
+  "0201bc093d985533e23581e421086d37c6235a0edf3bc20ac0a4f5fab627adb6b0": {
+    "as_source": 70,
+    "as_target": 51,
+    "as_intermediate": 269,
+    "non_typical_paths": 269,
+    "success_rate": 0.2,
+    "degree_centrality": 0.32653061224489793,
+    "clustering": 0.4166666666666667
+  },
+  "0200000000727d3b67513c916f16975e3bf8f3304cf3fcf0ed855e2ae41888f461": {
+    "as_source": 61,
+    "as_target": 67,
+    "as_intermediate": 321,
+    "non_typical_paths": 321,
+    "success_rate": 0.22950819672131148,
+    "degree_centrality": 0.4081632653061224,
+    "clustering": 0.4
+  },
+  "020154791bfcc0000e7c2fdb481b7c122a9aced5f8a3faa53002886ca5395b3098": {
+    "as_source": 63,
+    "as_target": 63,
+    "as_intermediate": 344,
+    "non_typical_paths": 344,
+    "success_rate": 0.15873015873015872,
+    "degree_centrality": 0.4081632653061224,
+    "clustering": 0.4105263157894737
+  },
+  "0201905f22243829e43b9ca7bffe90155a474687eccc705b3d30d163b14f400511": {
+    "as_source": 49,
+    "as_target": 69,
+    "as_intermediate": 364,
+    "non_typical_paths": 364,
+    "success_rate": 0.5714285714285714,
+    "degree_centrality": 0.4081632653061224,
+    "clustering": 0.3894736842105263
+  },
+  "02016724f45bb5fb6f233b3bf3938baea3aae8c12ddeea64f8c24902a8a4f57fe4": {
+    "as_source": 50,
+    "as_target": 59,
+    "as_intermediate": 335,
+    "non_typical_paths": 335,
+    "success_rate": 0.68,
+    "degree_centrality": 0.36734693877551017,
+    "clustering": 0.3790849673202614
+  },
+  "0200b354798e517bcbc7f78b0ccd3ab2e7b49be15bee6d9e7a9f19331cabc3db14": {
+    "as_source": 61,
+    "as_target": 46,
+    "as_intermediate": 334,
+    "non_typical_paths": 334,
+    "success_rate": 0.16393442622950818,
+    "degree_centrality": 0.36734693877551017,
+    "clustering": 0.42483660130718953
+  },
+  "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296d": {
+    "as_source": 64,
+    "as_target": 56,
+    "as_intermediate": 330,
+    "non_typical_paths": 330,
+    "success_rate": 0.671875,
+    "degree_centrality": 0.4081632653061224,
+    "clustering": 0.43157894736842106
+  },
+  "02005028c1f9d99c39875cffbfbb2efdb6c103ba85ffeefbd06b9e44df195ad713": {
+    "as_source": 63,
+    "as_target": 60,
+    "as_intermediate": 361,
+    "non_typical_paths": 361,
+    "success_rate": 0.6984126984126984,
+    "degree_centrality": 0.42857142857142855,
+    "clustering": 0.3952380952380952
+  },
+  "02009947c197575f5a948e1e4343c41dc2e6122a9bd644629afb919f30e1115ff8": {
+    "as_source": 61,
+    "as_target": 60,
+    "as_intermediate": 359,
+    "non_typical_paths": 359,
+    "success_rate": 0.7540983606557377,
+    "degree_centrality": 0.4081632653061224,
+    "clustering": 0.4052631578947368
+  },
+  "020080a6a379cbf6f2d6a0231b274f311899b1f6568d73d7ff4032536b394df3b0": {
+    "as_source": 71,
+    "as_target": 72,
+    "as_intermediate": 268,
+    "non_typical_paths": 268,
+    "success_rate": 0.7183098591549296,
+    "degree_centrality": 0.32653061224489793,
+    "clustering": 0.4
+  },
+  "0201af659a3986832bb5bf2493c537cee9f7d62a7bff5d0a68176c1d60df931cf7": {
+    "as_source": 59,
+    "as_target": 53,
+    "as_intermediate": 362,
+    "non_typical_paths": 362,
+    "success_rate": 0.6949152542372882,
+    "degree_centrality": 0.4081632653061224,
+    "clustering": 0.41578947368421054
+  },
+  "02004c625d622245606a1ea2c1c69cfb4516b703b47945a3647713c05fe4aaeb1c": {
+    "as_source": 62,
+    "as_target": 62,
+    "as_intermediate": 390,
+    "non_typical_paths": 390,
+    "success_rate": 0.7258064516129032,
+    "degree_centrality": 0.5102040816326531,
+    "clustering": 0.38
+  },
+  "02004d8933df4f002fa95d8c37ca43eb9c175d310aad55cc6d442e4accc3740029": {
+    "as_source": 62,
+    "as_target": 57,
+    "as_intermediate": 312,
+    "non_typical_paths": 312,
+    "success_rate": 0.6935483870967742,
+    "degree_centrality": 0.36734693877551017,
+    "clustering": 0.38562091503267976
   }
 }

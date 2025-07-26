@@ -19,7 +19,7 @@ def generate_policy(allow_null=True):
         "min_htlc": str(random.choice([1000, 5000, 10000])),
         "fee_base_msat": str(random.choice([0, 1000, 2000, 3000])),
         "fee_rate_milli_msat": str(random.choice([1, 10, 20, 50, 100])),
-        "disabled": random.choice([False]*9 + [True]*1),  # disabled is rare
+        "disabled": random.choice([False] * 10 + [True] * 0),  # disabled is rare
         "max_htlc_msat": str(random.randint(10000000, 1980000000)),
         "last_update": int(time.time()),
         "custom_records": {},
@@ -80,9 +80,9 @@ def save_edges(edges: List[dict], output_path: str):
         json.dump({"edges": edges}, f, indent=4)
 
 if __name__ == "__main__":
-    node_file_path = "nodes_22.json"  # your input node file
+    node_file_path = "nodes_50.json"  # your input node file
     output_file_path = "edges_generated.json"
-    NUM_EDGES = 100  # adjustable
+    NUM_EDGES = 500  # adjustable
     ALLOW_PARALLEL_CHANNELS = False  # toggle this for parallel channel behavior
 
     pub_keys = load_nodes(node_file_path)
