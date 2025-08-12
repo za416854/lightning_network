@@ -33,7 +33,7 @@ from itertools import combinations
 from typing import List
 
 def load_nodes(file_path: str) -> List[str]:
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
         return [node['pub_key'] for node in data['nodes'] if 'pub_key' in node]
 
@@ -43,15 +43,15 @@ def generate_channel_id_and_point(index: int) -> (str, str):
     chan_point_txid = hashlib.sha256((base + "_tx").encode()).hexdigest()
     chan_point_index = random.randint(0, 1)
     return str(channel_id), f"{chan_point_txid}:{chan_point_index}"
-
+# 從所有可能的節點對中，最多選出你要的通道數量，但不要超過可用的總數。
 def generate_edges(pub_keys: List[str], num_edges: int, allow_parallel: bool = False) -> List[dict]:
     channels = []
     pair_set = set()
-    
-    all_possible_pairs = list(combinations(pub_keys, 2))
+
+    all_possible_pairs = list(combinations(pub_keys, 2)) # 給你一個清單，它會幫你列出「不重複的所有可能兩兩組合（或多個）」。["A", "B", "C"] => [('A', 'B'), ('A', 'C'), ('B', 'C')]
     if not allow_parallel:
         random.shuffle(all_possible_pairs)
-        selected_pairs = all_possible_pairs[:min(num_edges, len(all_possible_pairs))]
+        selected_pairs = all_possible_pairs[:min(num_edges, len(all_possible_pairs))] # 你說你要 num_edges 條通道，但我最多只能給你現有的 len(all_possible_pairs) 條！」，這樣可以避免你說要 100 條通道，但節點只有 5 個，根本湊不出那麼多。
     else:
         selected_pairs = [tuple(random.sample(pub_keys, 2)) for _ in range(num_edges)]
 
@@ -80,7 +80,7 @@ def save_edges(edges: List[dict], output_path: str):
         json.dump({"edges": edges}, f, indent=4)
 
 if __name__ == "__main__":
-    node_file_path = "nodes_50.json"  # your input node file
+    node_file_path = "nodes_200.json"  # your input node file
     output_file_path = "edges_generated.json"
     NUM_EDGES = 500  # adjustable
     ALLOW_PARALLEL_CHANNELS = False  # toggle this for parallel channel behavior
